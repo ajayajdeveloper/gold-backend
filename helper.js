@@ -8,7 +8,7 @@ export async function getPriceById(client, id) {
 }
 export async function deletePriceById(client, id) {
   const result = await client
-    .db("goldRate")
+    .db("goldRate")   
     .collection("price")
     .deleteOne({ id: id });
   console.log("connected", result);
