@@ -29,9 +29,9 @@ router.route("/signup").post(async(request,response) =>
 
 router.route("/login").post(async(request,response) => 
 {    
-   const {username,password} = request.body; 
+   const {email,password} = request.body; 
    const client  =await createConnection();
-   const user = await getUser(client,{username:username})
+   const user = await getUser(client,{email:email})
    const inDbStorePassword = user.password;
    const isPassMatch = await bcrypt.compare(password,inDbStorePassword)
    if(isPassMatch)
@@ -46,6 +46,25 @@ router.route("/login").post(async(request,response) =>
    
 }) 
 
+
+// router.route("/login").post(async(request,response) => 
+// {    
+//    const {username,password} = request.body; 
+//    const client  =await createConnection();
+//    const user = await getUser(client,{username:username})
+//    const inDbStorePassword = user.password;
+//    const isPassMatch = await bcrypt.compare(password,inDbStorePassword)
+//    if(isPassMatch)
+//    {
+//         const token = jwt.sign({id:user._id},process.env.SECERET_KEY)
+//        response.send({message:"successfully login",token:token});
+//    }
+//    else
+//    {
+//     response.send({message:"invalidlogin"});
+//    }
+   
+// }) 
 
 async function genPassword(password)
 {
